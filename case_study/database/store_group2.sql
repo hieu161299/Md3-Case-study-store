@@ -18,12 +18,15 @@ create table products
     price   float                          not null,
     quantity    int default 0,
     idCategory  int                            not null,
+    image text ,
     FOREIGN KEY (idCategory) REFERENCES category (id)
 );
-insert into products(name, price, quantity, idCategory)
-values ('dell', 1000, 20, 1);
+insert into products(name, price, quantity, idCategory , image)
+values ('dell', 1000, 20, 1 , 'https://cdn.tgdd.vn/Products/Images/44/284337/dell-inspiron-16-5620-i7-n6i7000w1-070722-013841-600x600.jpg');
 select *
 from products;
+
+
 
 create table users
 (

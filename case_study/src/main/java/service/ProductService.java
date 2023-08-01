@@ -38,7 +38,9 @@ public class ProductService implements IProductService<Product> {
                 int idCategory = resultSet.getInt("idCategory");
                 String nameCategory = resultSet.getString("nameCategory");
                 Category category = new Category(idCategory , nameCategory);
-                Product product = new Product(id , name , quantity , price , category );
+                String image = resultSet.getString("image");
+
+                Product product = new Product(id , name , quantity , price , category , image );
                 productList.add(product);
             }
         } catch (SQLException e) {

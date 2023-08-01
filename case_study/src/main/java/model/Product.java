@@ -6,19 +6,22 @@ public class Product {
     private int quantity;
     private float price;
     private Category category;
+    private String image ;
 
-    public Product(int id, String name, int quantity, float price, Category category) {
+    public Product(int id, String name, int quantity, float price, Category category , String image) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.category = category;
+        this.image = image;
     }
-    public Product( String name, int quantity, float price, Category category) {
+    public Product( String name, int quantity, float price, Category category , String image) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.category = category;
+        this.image = image;
     }
     public int getId() {
         return id;
@@ -58,5 +61,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
