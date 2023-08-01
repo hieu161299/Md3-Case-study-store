@@ -9,8 +9,9 @@ public class User {
     private String name;
     private int age;
     private String address;
+    private String image;
 
-    public User(int id, String username, String password, String role, String name, int age, String address) {
+    public User(int id, String username, String password, String role, String name, int age, String address , String image) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -18,14 +19,16 @@ public class User {
         this.name = name;
         this.age = age;
         this.address = address;
+        this.image = image;
     }
-    public User( String username, String password, String role, String name, int age, String address) {
+    public User( String username, String password, String role, String name, int age, String address , String image) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.name = name;
         this.age = age;
         this.address = address;
+        this.image = image;
     }
 
     public int getId() {

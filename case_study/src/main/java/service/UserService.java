@@ -35,7 +35,8 @@ public class UserService  {
                 String name = resultSet.getString("name");
                 int age = resultSet.getInt("age");
                 String address = resultSet.getString("address");
-                User user = new User(id , username , password , role , name , age , address);
+                String image = resultSet.getString("image");
+                User user = new User(id , username , password , role , name , age , address , image);
                 userList.add(user);
             }
         } catch (SQLException e) {
