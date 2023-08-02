@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,7 +117,7 @@
         </div>
         <button type="submit" name="checkuser">Đăng nhập</button>
     </form>
-    <p>Chưa có tài khoản? <a href="RegisterServlet.jsp" class="register-link"><i class="fas fa-user-plus"></i>Đăng ký ngay</a></p>
+    <p>Chưa có tài khoản? <a href="user/Register.jsp" class="register-link"><i class="fas fa-user-plus"></i>Đăng ký ngay</a></p>
 </div>
 
 <script src="js/bootstrap.min.js"></script> <!-- Đường dẫn tới tệp JavaScript Bootstrap (tùy chọn) -->

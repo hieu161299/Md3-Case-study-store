@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "UserController", value = "/Users")
@@ -52,18 +53,14 @@ public class UserController extends HttpServlet {
                 checkLogin(request , response);
                 break;
             case "register":
-                addRegister(request , response);
+                try {
+                    addRegister(request , response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
         }
     }
-
-    private void addRegister(HttpServletRequest request, HttpServletResponse response) {
-           String username = request.getParameter("username");
-           String password = request.getParameter("password");
-           String role = "member";
-
-    }
-
     private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
@@ -78,7 +75,7 @@ public class UserController extends HttpServlet {
             if(checkAdmin){
                 try {
 //                khi đăng nhập thành công chuyển trang Admin home vào đây
-                    response.sendRedirect("/Users?action=register");
+                    response.sendRedirect("/view?action=findAll");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -106,5 +103,17 @@ public class UserController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
+    }
+    private void addRegister(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String role = "member";
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+        String address = request.getParameter("address");
+        String image = request.getParameter("image");
+        User user = new User(username , password , role ,name ,age,address,image);
+        userService.add(user);
+        response.sendRedirect("/Users?action=login");
     }
 }
