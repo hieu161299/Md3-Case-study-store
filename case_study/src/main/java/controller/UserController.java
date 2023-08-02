@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "UserController", value = "/Users")
@@ -56,14 +57,6 @@ public class UserController extends HttpServlet {
                 break;
         }
     }
-
-    private void addRegister(HttpServletRequest request, HttpServletResponse response) {
-           String username = request.getParameter("username");
-           String password = request.getParameter("password");
-           String role = "member";
-
-    }
-
     private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
