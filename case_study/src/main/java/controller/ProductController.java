@@ -1,5 +1,6 @@
 package controller;
 
+import filter.SessionUserMember;
 import model.Product;
 import service.ProductService;
 
@@ -14,19 +15,22 @@ public class ProductController extends HttpServlet {
     ProductService productService = new ProductService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        HttpSession session = request.getSession();
-        String role = (String) session.getAttribute("role");
-        if (role.equals("member")){
-            switch (action){
-                case "findAll":
-                    findAll(request, response);
-                    break;
-                case "search":
-                    search(request, response);
-                    break;
+
+            String action = request.getParameter("action");
+            HttpSession session = request.getSession();
+            String role = (String) session.getAttribute("role");
+            if (role.equals("member")){
+                switch (action){
+                    case "findAll":
+                        findAll(request, response);
+                        break;
+                    case "search":
+                        search(request, response);
+                        break;
+                }
+            }else if (role.equals("admin")){
+
             }
-        }
 
     }
 
@@ -45,7 +49,7 @@ public class ProductController extends HttpServlet {
     }
 
     private void findAll(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/product/findAll.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/product/homeCustomer.jsp");
         try {
             List<Product> productList = productService.findAll();
             request.setAttribute("productList" , productList);
