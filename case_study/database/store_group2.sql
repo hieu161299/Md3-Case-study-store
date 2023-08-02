@@ -23,6 +23,7 @@ create table products
 );
 insert into products(name, price, quantity, idCategory , image)
 values ('dell', 1000, 20, 1 , 'https://cdn.tgdd.vn/Products/Images/44/284337/dell-inspiron-16-5620-i7-n6i7000w1-070722-013841-600x600.jpg');
+
 select *
 from products;
 
@@ -64,4 +65,5 @@ create table oderDetail (
 );
 insert into oderdetail( priceProduct, quantity, idProduct, idOder)
 values (1000 , 3 , 1 , 1);
-
+/*// đổi role sang member*/
+update users set role = 'member' where id = 2;

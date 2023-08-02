@@ -53,4 +53,16 @@ public class ProductService implements IProductService<Product> {
     public void edit(int id, Product product) {
 
     }
+
+    public List<Product> findByName(String name) {
+        List<Product> productList = findAll();
+        List<Product> searchList = new ArrayList<>();
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getName().toLowerCase().contains(name.toLowerCase())){
+                System.out.println(productList.get(i).toString());
+                searchList.add(productList.get(i));
+            }
+        }
+        return searchList;
+    }
 }

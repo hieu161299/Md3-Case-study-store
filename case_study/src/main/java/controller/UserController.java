@@ -85,7 +85,7 @@ public class UserController extends HttpServlet {
             }else if(checkMember){
                 try {
 //                khi đăng nhập thành công chuyển trang Member home vào đây
-                    response.sendRedirect("/Users?action=register");
+                    response.sendRedirect("/view?action=findAll");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
