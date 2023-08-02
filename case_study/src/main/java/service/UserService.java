@@ -96,4 +96,13 @@ public class UserService  {
         }
         return -1;
     }
+    public User findUserById(int id){
+        users = findAll();
+        for (User user: users ) {
+            if (user.getId() == id){
+                return user;
+            }
+        }
+        return null;
+    }
 }

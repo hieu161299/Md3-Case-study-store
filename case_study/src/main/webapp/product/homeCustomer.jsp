@@ -19,7 +19,7 @@
 </head>
 
 <body>
-
+<a href="">thông tin cá nhân</a>
 <table border="1">
     <tr>
         <th>Ảnh</th>
