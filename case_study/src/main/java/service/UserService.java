@@ -87,4 +87,13 @@ public class UserService  {
         }
         return null;
     }
+    public int getIdUser(String username , String password){
+        users = findAll();
+        for (User user: users) {
+            if(username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                return user.getId();
+            }
+        }
+        return -1;
+    }
 }
