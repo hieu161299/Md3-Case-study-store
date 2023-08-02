@@ -75,8 +75,8 @@
   </style>
 </head>
 <body>
-<div class="container mt-5"> <!-- Sử dụng lớp "container" của Bootstrap để căn giữa nội dung -->
-  <form action="RegisterServlet" method="post">
+<div class="container mt-5">
+  <form action="RegisterServlet" method="post" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="username">Tên đăng nhập:</label>
       <input type="text" class="form-control" id="username" name="username" required>
@@ -92,10 +92,26 @@
       <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
     </div>
 
+    <!-- New fields for name, age, and image -->
+    <div class="mb-3">
+      <label for="name">Họ và tên:</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="age">Tuổi:</label>
+      <input type="number" class="form-control" id="age" name="age" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="image">Ảnh đại diện:</label>
+      <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+    </div>
+
     <button type="submit" class="btn btn-primary">Đăng ký</button>
   </form>
 </div>
 
-<script src="js/bootstrap.min.js"></script> <!-- Đường dẫn tới tệp JavaScript Bootstrap (tùy chọn) -->
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

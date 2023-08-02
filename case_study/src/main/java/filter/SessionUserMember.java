@@ -13,5 +13,4 @@ public class SessionUserMember {
         }
         return false;
     }
-
 }

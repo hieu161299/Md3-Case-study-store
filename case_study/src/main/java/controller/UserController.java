@@ -51,18 +51,30 @@ public class UserController extends HttpServlet {
             case "login":
                 checkLogin(request , response);
                 break;
+            case "register":
+                addRegister(request , response);
+                break;
         }
+    }
+
+    private void addRegister(HttpServletRequest request, HttpServletResponse response) {
+           String username = request.getParameter("username");
+           String password = request.getParameter("password");
+           String role = "member";
+
     }
 
     private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        int id = userService.getIdUser(userName , password);
         boolean checkAdmin = SessionUserAdmin.checkUser(request);
         boolean checkMember = SessionUserMember.checkUser(request);
         if (userService.checkUser(userName, password)) {
             String role = userService.getRole(userName, password);
             HttpSession session = request.getSession();
             session.setAttribute("role", role);
+            session.setAttribute("id", id);
             if(checkAdmin){
                 try {
 //                khi đăng nhập thành công chuyển trang Admin home vào đây
