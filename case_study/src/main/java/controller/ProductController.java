@@ -13,12 +13,16 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        switch (action){
-            case "findAll":
-                findAll(request, response);
-                break;
+        String role = request.getParameter("role");
+        if (role.equals("member")){
+            switch (action){
+                case "findAll":
+                    findAll(request, response);
+                    break;
 
+            }
         }
+
     }
 
     private void findAll(HttpServletRequest request, HttpServletResponse response) {
