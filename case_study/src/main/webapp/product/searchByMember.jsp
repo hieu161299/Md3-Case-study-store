@@ -12,27 +12,34 @@
     <title>Title</title>
 </head>
 <body>
-<table border="1">
-  <tr>
-    <th>Ảnh</th>
-    <th>Tên</th>
-    <th>giá</th>
-
-    <th colspan="2">Action</th>
-  </tr>
-
-  <c:forEach items="${searchList}" var="product">
-
+<c:if test="${searchList.size()  == 0}">
+  <p>Không có</p>
+</c:if>
+<c:if test="${searchList.size()  > 0}">
+  <table border="1">
     <tr>
-      <td><img src="${product.image}" style="width: 150px ; height:  150px" alt="sv"></td>
-      <td>${product.name}</td>
-      <td>${product.price}</td>
+      <th>Ảnh</th>
+      <th>Tên</th>
+      <th>giá</th>
 
-
+      <th colspan="2">Action</th>
     </tr>
 
-  </c:forEach>
-</table>
+    <c:forEach items="${searchList}" var="product">
+
+      <tr>
+        <td><img src="${product.image}" style="width: 150px ; height:  150px" alt="sv"></td>
+        <td>${product.name}</td>
+        <td>${product.price}</td>
+
+
+      </tr>
+
+    </c:forEach>
+  </table>
+
+</c:if>
+
 <a href="view?action=findAll">Trở về trang chủ</a>
 </body>
 </html>
