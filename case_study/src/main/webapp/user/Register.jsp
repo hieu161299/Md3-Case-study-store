@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -76,7 +77,7 @@
 </head>
 <body>
 <div class="container mt-5">
-  <form action="http://localhost:8080/Users?action=login" method="post" enctype="multipart/form-data">
+  <form action="http://localhost:8080/Users?action=register" method="post">
     <div class="mb-3">
       <label for="username">Tên đăng nhập:</label>
       <input type="text" class="form-control" id="username" name="username" required>
@@ -100,7 +101,7 @@
 
     <div class="mb-3">
       <label for="age">Tuổi:</label>
-      <input type="number" class="form-control" id="age" name="age" required>
+      <input type="text" class="form-control" id="age" name="age" required>
     </div>
     <div class="mb-3">
       <label for="age">Địa chỉ:</label>
@@ -111,7 +112,7 @@
       <input type="text" class="form-control" id="image" name="image" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Đăng ký</button>
+    <button  class="btn btn-primary">Đăng ký</button>
   </form>
 </div>
 

@@ -17,9 +17,9 @@ public class UserService  {
     Connection connection = ConnectToMySQL.getConnection();
 
     public void add(User user) throws SQLException {
-        String query = "insert into store_group2.users( username, password, role, name , age , address ,image) values (?, ?, ?, ?, ?, ?, ?);";
+        String query = "insert into users( username, password, role, name , age , address ,image) values (?, ?, ?, ?, ?, ?, ?);";
         PreparedStatement statement = connection.prepareStatement(query);
-        try {;
+        try {
             statement.setString(1, user.getUsername());
             statement.setString(2,user.getPassword());
             statement.setString(3,user.getRole());
