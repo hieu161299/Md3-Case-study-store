@@ -38,6 +38,10 @@ public class ProductController extends HttpServlet {
                 case "search":
                     findAll(request, response);
                     break;
+
+                case "findbill":
+                    showbill(request, response);
+                    break;
             }
         }
 
