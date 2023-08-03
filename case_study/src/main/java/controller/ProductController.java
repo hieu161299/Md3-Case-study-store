@@ -1,6 +1,7 @@
 package controller;
 
 import filter.SessionUserMember;
+import model.Category;
 import model.Product;
 import model.dto.SaveBill;
 import service.OrderDetailsJDBC;
@@ -10,6 +11,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,16 +45,23 @@ public class ProductController extends HttpServlet {
                     break;
                 case "findbill":
                     showbill(request, response);
+                    break;
+                case "create":
+                   showFormCreate(request,response);
+                   break;
             }
         }
 
 
     }
-
+    private void showFormCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("product/create.jsp");
+        dispatcher.forward(request, response);
+    }
     private void showbill(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OrderDetailsJDBC orderDetailsJDBC = new OrderDetailsJDBC();
-        List <SaveBill> saveBills = orderDetailsJDBC.findBill();
-        request.setAttribute("saveBills" , saveBills);
+        List<SaveBill> saveBills = orderDetailsJDBC.findBill();
+        request.setAttribute("saveBills", saveBills);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/product/Order.jsp");
         dispatcher.forward(request, response);
     }
@@ -81,7 +90,6 @@ public class ProductController extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     private void findAll(HttpServletRequest request, HttpServletResponse response) {
@@ -114,6 +122,28 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        switch (action) {
+            case "create":
+                try {
+                    createProduct(request , response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 
+        }
+
+    }
+
+    private void createProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        String name = request.getParameter("name");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        float price = Float.parseFloat(request.getParameter("price"));
+        int idCategory = Integer.parseInt(request.getParameter("idCategory"));
+        Category category = new Category(idCategory);
+        String image = request.getParameter("image");
+        Product product = new Product( name, quantity, price, category,image);
+        productService.add(product);
+        response.sendRedirect("http://localhost:8080/view?action=findAll");
     }
 }

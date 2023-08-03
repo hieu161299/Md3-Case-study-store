@@ -37,6 +37,10 @@
    style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #b80000;">
     <i class="fas fa-trash-alt"></i>xem hóa đơn
 </a>
+<a href="http://localhost:8080/view?action=create" class="delete-link"
+   style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #b80000;">
+    <i class="fas fa-trash-alt"></i>Thêm sản phẩm
+</a>
 <form action="/view" method="get">
     <input type="hidden" name="action" value="search">
     <input type="text" placeholder="search" name="nameSearch">

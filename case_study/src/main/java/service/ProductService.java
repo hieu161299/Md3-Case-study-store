@@ -12,12 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService implements IProductService<Product> {
-    Connection connection = ConnectToMySQL.getConnection();
+    static Connection connection = ConnectToMySQL.getConnection();
     @Override
-    public void add(Product product) {
-
+    public void add(Product product) throws SQLException {
+        String query = "insert into products( name, quantity, price, idCategory , image) values (?, ?, ?, ?, ?);";
+        PreparedStatement statement = connection.prepareStatement(query);
+           statement.setString(1,product.getName());
+           statement.setInt(2,product.getQuantity());
+           statement.setFloat(3,product.getPrice());
+           statement.setInt(4,product.getCategory().getId());
+           statement.setString(5,product.getImage());
+           statement.executeUpdate();
     }
-
     @Override
     public void delete(int id) {
 
