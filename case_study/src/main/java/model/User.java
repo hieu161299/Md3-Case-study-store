@@ -30,6 +30,12 @@ public class User {
         this.address = address;
         this.image = image;
     }
+    public User(  String name, int age, String address , String image) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.image = image;
+    }
 
     public int getId() {
         return id;

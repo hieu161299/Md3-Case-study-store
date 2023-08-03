@@ -26,7 +26,44 @@ public class UserController extends HttpServlet {
                  break;
              case "register":
                  showRegisterForm(request , response);
+             case "information":
+                 showInformation(request , response);
+                 break;
+             case "editCustomer":
+                 showFormEdit(request , response);
+                 break;
          }
+    }
+
+    private void showFormEdit(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/user/formEditCustomer.jsp");
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("id");
+        User user = userService.findUserById(id);
+        request.setAttribute("user", user);
+        try {
+            dispatcher.forward(request , response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showInformation(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/informationCustomer.jsp");
+        HttpSession session = request.getSession();
+        int id = (int) session.getAttribute("id");
+        User user = userService.findUserById(id);
+        request.setAttribute("user", user);
+
+        try {
+            dispatcher.forward(request ,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showRegisterForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -59,19 +96,39 @@ public class UserController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "editCustomer":
+                editCustomer(request , response);
+                break;
         }
     }
+
+    private void editCustomer(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+        String address = request.getParameter("address");
+        String image = request.getParameter("image");
+        User user = new User(name ,age,address,image);
+        userService.edit(id , user);
+        try {
+            response.sendRedirect("http://localhost:8080/Users?action=information");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         int id = userService.getIdUser(userName , password);
-        boolean checkAdmin = SessionUserAdmin.checkUser(request);
-        boolean checkMember = SessionUserMember.checkUser(request);
+
         if (userService.checkUser(userName, password)) {
             String role = userService.getRole(userName, password);
             HttpSession session = request.getSession();
             session.setAttribute("role", role);
             session.setAttribute("id", id);
+            boolean checkAdmin = SessionUserAdmin.checkUser(request);
+            boolean checkMember = SessionUserMember.checkUser(request);
             if(checkAdmin){
                 try {
 //                khi đăng nhập thành công chuyển trang Admin home vào đây
@@ -83,14 +140,6 @@ public class UserController extends HttpServlet {
                 try {
 //                khi đăng nhập thành công chuyển trang Member home vào đây
                     response.sendRedirect("/view?action=findAll");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }else{
-                try {
-//                    nếu không thuộc 2 quyền trên sẽ về trang đăng nhập
-                    response.sendRedirect("/Users?action=login");
-                    userService.findAll();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

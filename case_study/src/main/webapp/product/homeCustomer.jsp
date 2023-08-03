@@ -19,7 +19,13 @@
 </head>
 
 <body>
-
+<a href="http://localhost:8080/Users?action=information">thông tin cá nhân</a>
+<a href="http://localhost:8080/Users?action=login">Đăng xuất</a>
+<form action="/view" method="get">
+    <input type="hidden" name="action" value="search">
+    <input type="text" placeholder="search" name="nameSearch">
+    <button>Tìm</button>
+</form>
 <table border="1">
     <tr>
         <th>Ảnh</th>
@@ -44,10 +50,6 @@
 
 </table>
 
-<form action="/view" method="get">
-    <input type="hidden" name="action" value="search">
-    <input type="text" placeholder="search" name="nameSearch">
-    <button>Tìm</button>
-</form>
+
 </body>
 </html>
