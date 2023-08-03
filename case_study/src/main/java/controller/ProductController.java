@@ -18,62 +18,40 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action");
+        request.setAttribute("action" , action);
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
         if (role.equals("member")) {
             switch (action) {
                 case "findAll":
-                    findAll(request, response);
-                    break;
                 case "search":
-                    search(request, response);
+                    findAll(request, response);
                     break;
             }
         } else if (role.equals("admin")) {
             switch (action) {
                 case "findAll":
+                case "search":
                     findAll(request, response);
                     break;
-                case "search":
-                    search(request, response);
-                    break;
             }
         }
 
-
-    }
-
-    private void search(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        String role = (String) session.getAttribute("role");
-        String name = request.getParameter("nameSearch");
-        request.setAttribute("searchList", productService.findByName(name));
-        if (role.equals("member")) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("product/searchByMember.jsp");
-            try {
-                dispatcher.forward(request, response);
-            } catch (ServletException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (role.equals("admin")) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("product/searchByAdmin.jsp");
-            try {
-                dispatcher.forward(request, response);
-            } catch (ServletException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
 
     }
 
     private void findAll(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
-        List<Product> productList = productService.findAll();
+        String action = request.getParameter("action");
+        List<Product> productList = null;
+        if (action.equals("findAll")){
+             productList = productService.findAll();
+        }else if (action.equals("search")){
+            String name = request.getParameter("nameSearch");
+           productList =productService.findByName(name);
+        }
+
         request.setAttribute("productList", productList);
         if (role.equals("member")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/product/homeCustomer.jsp");

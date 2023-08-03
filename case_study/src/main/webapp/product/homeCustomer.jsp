@@ -23,7 +23,7 @@
 <a href="http://localhost:8080/Users?action=login">Đăng xuất</a>
 <form action="/view" method="get">
     <input type="hidden" name="action" value="search">
-    <input type="text" placeholder="search" name="nameSearch">
+    <input type="text" placeholder="search by name" name="nameSearch">
     <button>Tìm</button>
 </form>
 <table border="1">
@@ -38,10 +38,11 @@
     <c:forEach items="${productList}" var="product">
 
         <tr>
+            <input type="hidden" name="pId" value="${product.id}">
             <td><img src="${product.image}" style="width: 150px ; height:  150px" alt="sv"></td>
             <td>${product.name}</td>
             <td>${product.price}</td>
-            <td>Thêm vào giỏ hàng</td>
+            <td><a href="http://localhost:8080/cart?action=addToCart&&pId=${product.id}">Thêm vào giỏ hàng</a></td>
             <td>mua ngay</td>
 
         </tr>
