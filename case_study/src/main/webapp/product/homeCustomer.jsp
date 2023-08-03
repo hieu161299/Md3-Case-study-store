@@ -43,7 +43,6 @@
             <td>${product.price}</td>
             <td>Thêm vào giỏ hàng</td>
             <td>mua ngay</td>
-
         </tr>
 
     </c:forEach>

@@ -33,6 +33,10 @@
    style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #b80000;">
     <i class="fas fa-trash-alt"></i>Thêm Admin
 </a>
+<a href="http://localhost:8080/view?action=findbill" class="delete-link"
+   style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #b80000;">
+    <i class="fas fa-trash-alt"></i>xem hóa đơn
+</a>
 <form action="/view" method="get">
     <input type="hidden" name="action" value="search">
     <input type="text" placeholder="search" name="nameSearch">
@@ -46,9 +50,7 @@
 
         <th colspan="2">Action</th>
     </tr>
-
     <c:forEach items="${productList}" var="product">
-
         <tr>
             <td><img src="${product.image}" style="width: 150px ; height:  150px" alt="sv"></td>
             <td>${product.name}</td>
@@ -68,7 +70,6 @@
             </td>
 
         </tr>
-
     </c:forEach>
 
 </table>
