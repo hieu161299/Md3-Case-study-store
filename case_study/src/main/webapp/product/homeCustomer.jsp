@@ -44,7 +44,6 @@
             <td>${product.price}</td>
             <td><a href="http://localhost:8080/cart?action=addToCart&&pId=${product.id}">Thêm vào giỏ hàng</a></td>
             <td>mua ngay</td>
-
         </tr>
 
     </c:forEach>

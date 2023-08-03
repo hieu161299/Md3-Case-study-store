@@ -2,12 +2,16 @@ package controller;
 
 import filter.SessionUserMember;
 import model.Product;
+import model.dto.SaveBill;
+import service.OrderDetailsJDBC;
 import service.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ProductController", value = "/view")
@@ -38,6 +42,14 @@ public class ProductController extends HttpServlet {
         }
 
 
+    }
+
+    private void showbill(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        OrderDetailsJDBC orderDetailsJDBC = new OrderDetailsJDBC();
+        List <SaveBill> saveBills = orderDetailsJDBC.findBill();
+        request.setAttribute("saveBills" , saveBills);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/product/Order.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void findAll(HttpServletRequest request, HttpServletResponse response) {
