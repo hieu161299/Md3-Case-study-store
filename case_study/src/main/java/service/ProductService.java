@@ -2,6 +2,7 @@ package service;
 
 import model.Category;
 import model.Product;
+import model.User;
 import service.IService.IProductService;
 
 import java.sql.Connection;
@@ -26,8 +27,16 @@ public class ProductService implements IProductService<Product> {
     }
 
     @Override
-    public void delete(int id) {
-
+    public void delete(int id){
+        String query = "delete from products where id = ?;";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setInt(1,id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -57,8 +66,20 @@ public class ProductService implements IProductService<Product> {
     }
 
     @Override
-    public void edit(int id, Product product) {
-
+    public void edit(int id , Product product){
+        String sql = "update products set name = ?  , quantity = ? , price = ? , idCategory = ? , image = ?  where id = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1 , product.getName());
+            preparedStatement.setInt(2,product.getQuantity());
+            preparedStatement.setFloat(3,product.getPrice());
+            preparedStatement.setInt(4,product.getCategory().getId());
+            preparedStatement.setString(5,product.getImage());
+            preparedStatement.setInt(6,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Product> findByName(String name) {

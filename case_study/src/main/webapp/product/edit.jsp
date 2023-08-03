@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: DELL
   Date: 03/08/2023
-  Time: 14:57
+  Time: 16:02
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -49,8 +49,12 @@
       </nav>
     </div>
     <div class="col-12 mt-5">
-      <form action="http://localhost:8080/view?action=create" method="post">
+      <form action="http://localhost:8080/view?action=edit" method="post">
         <div class="form-row">
+          <div class="mb-3">
+            <label for="id">ID:</label>
+            <input type="text" class="form-control" id="id" name="id" value="${id}" readonly required>
+          </div>
           <div class="form-group col-md-6">
             <label for="inputEmail4">Name</label>
             <input type="text" class="form-control" id="inputEmail4" name="name">
@@ -78,7 +82,7 @@
             <input type="text" class="form-control" id="image" name="image">
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Create Product</button>
+        <button type="submit" class="btn btn-primary">Update</button>
       </form>
     </div>
   </div>
