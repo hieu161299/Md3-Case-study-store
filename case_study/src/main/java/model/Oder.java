@@ -1,16 +1,19 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Oder {
     private int id;
     private Date time;
-    private int idUser;
+    private User customer;
+    private int quantity ;
 
-    public Oder(int id, Date time, int idUser) {
-        this.id = id;
-        this.time = time;
-        this.idUser = idUser;
+    private List<Item> itemList ;
+    private int status;
+
+    public Oder() {
+        this.status = 0;
     }
 
     public int getId() {
@@ -29,11 +32,35 @@ public class Oder {
         this.time = time;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public User getCustomer() {
+        return customer;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setCustomer(User customer) {
+        this.customer = customer;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

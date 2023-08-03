@@ -24,6 +24,7 @@ public class ProductService implements IProductService<Product> {
            statement.setString(5,product.getImage());
            statement.executeUpdate();
     }
+
     @Override
     public void delete(int id) {
 
@@ -71,5 +72,13 @@ public class ProductService implements IProductService<Product> {
         }
         return searchList;
     }
-
+    public Product getById(int id){
+        Product product = null;
+        List<Product> productList = findAll();
+        for (Product p:productList ) {
+            if (id == p.getId());
+             product = p;
+        }
+        return product;
+    }
 }
