@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductService implements IProductService<Product> {
     Connection connection = ConnectToMySQL.getConnection();
     @Override
-    public void add(Product product) {
+    public void add(Product product) throws SQLException {
 
     }
 
@@ -64,5 +64,14 @@ public class ProductService implements IProductService<Product> {
             }
         }
         return searchList;
+    }
+    public Product getById(int id){
+        Product product = null;
+        List<Product> productList = findAll();
+        for (Product p:productList ) {
+            if (id == p.getId());
+             product = p;
+        }
+        return product;
     }
 }

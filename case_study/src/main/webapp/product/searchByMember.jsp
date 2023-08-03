@@ -13,7 +13,7 @@
 </head>
 <body>
 <c:if test="${searchList.size()  == 0}">
-  <p>Không có</p>
+  <p>Không tìm thấy sản phẩm theo yêu cầu</p>
 </c:if>
 <c:if test="${searchList.size()  > 0}">
   <table border="1">
