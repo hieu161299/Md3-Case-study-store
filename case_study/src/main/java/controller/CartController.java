@@ -1,5 +1,7 @@
 package controller;
 
+import model.Item;
+import model.Oder;
 import model.Product;
 import service.ProductService;
 
@@ -7,6 +9,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "CartController", value = "/cart")
 public class CartController extends HttpServlet {
@@ -25,7 +29,45 @@ public class CartController extends HttpServlet {
 
     private void addToCart(HttpServletRequest request, HttpServletResponse response) {
             int pId = Integer.parseInt(request.getParameter("pId"));
-            Product product = productService.findAll().get(pId);
+            int quantity = 1;
+            int id ;
+            HttpSession session = request.getSession();
+            if (request.getParameter("pId") != null){
+                id = Integer.parseInt(request.getParameter("pId"));
+                Product product =  productService.getById(pId);
+                if (product != null){
+                    if (request.getParameter("quantity") != null){
+                        quantity = Integer.parseInt(request.getParameter("quantity"));
+                    }
+                }
+
+                if (request.getParameter("order") != null){
+                    Oder oder = new Oder();
+                    List<Item>  items = new ArrayList<>();
+                    Item item = new Item();
+                    item.setQuantity(quantity);
+                    item.setProduct(product);
+                    item.setPrice(product.getPrice());
+                    items.add(item);
+                    oder.setItemList(items);
+                    session.setAttribute("order" , oder);
+                }else {
+                    Oder order = (Oder) session.getAttribute("order");
+                    List<Item>  items = order.getItemList();
+
+                    if (items == null){
+                        Item item = new Item();
+                        item.setQuantity(quantity);
+                        item.setProduct(product);
+                        item.setPrice(product.getPrice());
+                        items.add(item);
+                    }else {
+                        order.setQuantity(order.getQuantity() + quantity);
+                    }
+
+                    session.setAttribute("order",order);
+                }
+            }
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/product/cartCustomer.jsp");
         try {

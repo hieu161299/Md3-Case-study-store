@@ -7,6 +7,7 @@ public class Oder {
     private int id;
     private Date time;
     private User customer;
+    private int quantity ;
 
     private List<Item> itemList ;
     private int status;
@@ -53,5 +54,13 @@ public class Oder {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

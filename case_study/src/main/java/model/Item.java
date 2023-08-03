@@ -6,6 +6,9 @@ public class Item {
     private int quantity ;
     private float price;
 
+    public Item() {
+    }
+
     public Item(int id, Product product, int quantity, float price) {
         this.id = id;
         this.product = product;
