@@ -48,7 +48,7 @@ public class ProductController extends HttpServlet {
         String role = (String) session.getAttribute("role");
         String name = request.getParameter("nameSearch");
         request.setAttribute("searchList", productService.findByName(name));
-        if (role.equals("member")){
+        if (role.equals("member")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("product/searchByMember.jsp");
             try {
                 dispatcher.forward(request, response);
@@ -57,7 +57,7 @@ public class ProductController extends HttpServlet {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }else if (role.equals("admin")) {
+        } else if (role.equals("admin")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("product/searchByAdmin.jsp");
             try {
                 dispatcher.forward(request, response);
@@ -75,7 +75,7 @@ public class ProductController extends HttpServlet {
         String role = (String) session.getAttribute("role");
         List<Product> productList = productService.findAll();
         request.setAttribute("productList", productList);
-        if (role.equals("member")){
+        if (role.equals("member")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/product/homeCustomer.jsp");
             try {
                 dispatcher.forward(request, response);
@@ -84,7 +84,7 @@ public class ProductController extends HttpServlet {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }else  if (role.equals("admin")){
+        } else if (role.equals("admin")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/product/homeAdmin.jsp");
             try {
                 dispatcher.forward(request, response);

@@ -36,7 +36,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
                             <label class="form-check-label" for="form1Example3" > Remember me </label>
                         </div>
-                        <a href="user/Register.jsp" style="margin-left: 20px">Forgot password?</a>
+                        <a href="user/Register.jsp" style="margin-left: 20px">Register</a>
                     </div>
 
                     <!-- Submit button -->

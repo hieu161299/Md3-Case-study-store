@@ -1,10 +1,7 @@
 package service;
 
 import model.User;
-import service.IService.IProductService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +41,20 @@ public class UserService  {
         }
 
     }
+    public void edit(int id , User user){
+        String sql = "update users set name = ?  , age = ? , image = ? , address = ?  where id = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1 , user.getName());
+            preparedStatement.setInt(2, user.getAge());
+            preparedStatement.setString(3,user.getImage());
+            preparedStatement.setString(4,user.getAddress());
+            preparedStatement.setInt(5,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public List<User> findAll() {
         List<User> userList = new ArrayList<>();
@@ -70,8 +81,8 @@ public class UserService  {
     }
     public boolean checkUser(String userName, String password) {
         users = findAll();
-        for (int i = 0; i < users.size(); i++) {
-            if (userName.equals(users.get(i).getUsername()) && password.equals(users.get(i).getPassword())) {
+        for (User user : users) {
+            if (userName.equals(user.getUsername()) && password.equals(user.getPassword())) {
                 return true;
             }
         }
@@ -79,9 +90,9 @@ public class UserService  {
     }
     public String getRole(String userName, String password) {
         String role = null;
-        for (int i = 0; i < users.size(); i++) {
-            if (userName.equals(users.get(i).getUsername()) && password.equals(users.get(i).getPassword())) {
-                role = users.get(i).getRole();
+        for (User user : users) {
+            if (userName.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                role = user.getRole();
                 return role;
             }
         }
