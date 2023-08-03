@@ -32,7 +32,14 @@ public class UserController extends HttpServlet {
              case "editCustomer":
                  showFormEdit(request , response);
                  break;
+             case "registeradmin":
+                 showRegisterAdmin(request , response);
          }
+    }
+
+    private void showRegisterAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/RegisterAdmin.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showFormEdit(HttpServletRequest request, HttpServletResponse response) {
@@ -99,7 +106,26 @@ public class UserController extends HttpServlet {
             case "editCustomer":
                 editCustomer(request , response);
                 break;
+            case "registeradmin":
+                try {
+                    addRegisterAdmin(request , response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
         }
+    }
+
+    private void addRegisterAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String role = "admin";
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+        String address = request.getParameter("address");
+        String image = request.getParameter("image");
+        User user = new User(username , password , role ,name ,age,address,image);
+        userService.add(user);
+        response.sendRedirect("/view?action=findAll");
     }
 
     private void editCustomer(HttpServletRequest request, HttpServletResponse response) {

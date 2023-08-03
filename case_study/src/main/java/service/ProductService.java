@@ -16,6 +16,7 @@ public class ProductService implements IProductService<Product> {
     @Override
     public void add(Product product) {
 
+
     }
 
     @Override
@@ -65,4 +66,5 @@ public class ProductService implements IProductService<Product> {
         }
         return searchList;
     }
+
 }
