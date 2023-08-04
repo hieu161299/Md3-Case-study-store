@@ -8,6 +8,32 @@ public class Oder {
     private Date time;
     private User customer;
 
+    // thêm các trường để làm giỏ hàng
+
+    private List<Product> productList;
+    private int quantityOder;
+
+    public Oder(List<Product> productList, int quantityOder) {
+        this.productList = productList;
+        this.quantityOder = quantityOder;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    public int getQuantityOder() {
+        return quantityOder;
+    }
+
+    public void setQuantityOder(int quantityOder) {
+        this.quantityOder = quantityOder;
+    }
+    //
 
     public Oder() {
 

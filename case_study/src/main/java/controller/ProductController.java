@@ -35,6 +35,9 @@ public class ProductController extends HttpServlet {
                 case "search":
                     findAll(request, response);
                     break;
+                case "showCart":
+                    showCart(request , response);
+                    break;
             }
         } else if (role.equals("admin")) {
             switch (action) {
@@ -42,14 +45,27 @@ public class ProductController extends HttpServlet {
                 case "search":
                     findAll(request, response);
                     break;
-
-                case "findbill":
+                case "findill":
                     showBill(request, response);
                     break;
             }
         }
 
 
+    }
+
+    private void showCart(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/product/cartCustomer.jsp");
+        HttpSession session = request.getSession();
+        List<Product> productList = (List<Product>) session.getAttribute("productList");
+        request.setAttribute("productList" , productList);
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showBill(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

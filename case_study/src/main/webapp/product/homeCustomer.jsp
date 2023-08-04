@@ -26,7 +26,7 @@
     <input type="text" placeholder="search by name" name="nameSearch">
     <button>Tìm</button>
 </form>
-<a href="http://localhost:8080/cart?action=showCart&idUser=${user.id}">Giỏ hàng của tôi</a>
+<a href="http://localhost:8080/view?action=showCart&idUser=${user.id}">Giỏ hàng của tôi</a>
 <table border="1">
     <tr>
         <th>Ảnh</th>
@@ -44,7 +44,7 @@
             <td>${product.name}</td>
             <td>${product.price}</td>
             <td>
-                <form action="http://localhost:8080/cart">
+                <form action="http://localhost:8080/oder">
                     <input type="hidden" name="action" value="addToCart">
                     <input type="hidden" name="idProduct" value="${product.id}">
                     <input type="hidden" name="idUser" value="${idUser}">

@@ -24,17 +24,16 @@
         <th colspan="">Action</th>
     </tr>
 
-    <c:forEach items="${cartList}" var="cart">
+    <c:forEach items="${productList}" var="product">
 
         <tr>
-            <input type="hidden" name="pId" value="${cart.product.id}">
-            <input type="hidden" name="cartId" value="${cart.id}">
-            <td><img src="${cart.product.image}" style="width: 150px ; height:  150px" alt="sv"></td>
-            <td>${cart.product.name}</td>
-            <td>${cart.product.price}</td>
-            <td>${cart.quantity}</td>
+            <input type="hidden" name="pId" value="${product.id}">
+            <td><img src="${product.image}" style="width: 150px ; height:  150px" alt="sv"></td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.quantity}</td>
 
-            <td>${cart.quantity * cart.product.price}</td>
+            <td>${product.quantity * product.price}</td>
             <td>Thanh toán</td>
         </tr>
 
