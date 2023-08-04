@@ -65,9 +65,17 @@ public class ProductController extends HttpServlet {
 
                     showFormEdit(request,response);
                     break;
+                case "revenue":
+                    showFormRevenue(request , response);
             }
         }
     }
+
+    private void showFormRevenue(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/product/revenue.jsp");
+        dispatcher.forward(request, response);
+    }
+
     private void showFormEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idProduct = Integer.parseInt(request.getParameter("idProduct"));
         request.setAttribute("id" , idProduct);
@@ -145,10 +153,23 @@ public class ProductController extends HttpServlet {
             case "edit":
                 editProduct(request , response);
                 break;
+            case "revenue":
+                try {
+                    revenueMonth(request , response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
         }
 
     }
-
+    private void revenueMonth(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String monthParam = request.getParameter("revenue");
+        int month = Integer.parseInt(monthParam);
+        float revenueMonth = productService.revenueMonth(month);
+        request.setAttribute("revenueMonth", revenueMonth);
+        request.setAttribute("month", month);
+        showFormRevenue(request, response);
+    }
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");

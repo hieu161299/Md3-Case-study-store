@@ -46,6 +46,11 @@
     <input type="text" placeholder="search" name="nameSearch">
     <button>Tìm</button>
 </form>
+<form action="/view" method="post">
+    <input type="hidden" name="action" value="revenue">
+    <input type="text" placeholder="search " name="revenue">
+    <button type="submit">Tìm doanh thu tháng</button>
+</form>
 <table border="1">
     <tr>
         <th>Ảnh</th>

@@ -14,25 +14,26 @@ import java.util.List;
 
 public class ProductService implements IProductService<Product> {
     static Connection connection = ConnectToMySQL.getConnection();
+
     @Override
     public void add(Product product) throws SQLException {
         String query = "insert into products( name, quantity, price, idCategory , image) values (?, ?, ?, ?, ?);";
         PreparedStatement statement = connection.prepareStatement(query);
-           statement.setString(1,product.getName());
-           statement.setInt(2,product.getQuantity());
-           statement.setFloat(3,product.getPrice());
-           statement.setInt(4,product.getCategory().getId());
-           statement.setString(5,product.getImage());
-           statement.executeUpdate();
+        statement.setString(1, product.getName());
+        statement.setInt(2, product.getQuantity());
+        statement.setFloat(3, product.getPrice());
+        statement.setInt(4, product.getCategory().getId());
+        statement.setString(5, product.getImage());
+        statement.executeUpdate();
     }
 
     @Override
-    public void delete(int id){
+    public void delete(int id) {
         String query = "delete from products where id = ?;";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
-            statement.setInt(1,id);
+            statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -46,17 +47,17 @@ public class ProductService implements IProductService<Product> {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 Float price = resultSet.getFloat("price");
                 int quantity = resultSet.getInt("quantity");
                 int idCategory = resultSet.getInt("idCategory");
                 String nameCategory = resultSet.getString("nameCategory");
-                Category category = new Category(idCategory , nameCategory);
+                Category category = new Category(idCategory, nameCategory);
                 String image = resultSet.getString("image");
 
-                Product product = new Product(id , name , quantity , price , category , image );
+                Product product = new Product(id, name, quantity, price, category, image);
                 productList.add(product);
             }
         } catch (SQLException e) {
@@ -66,16 +67,16 @@ public class ProductService implements IProductService<Product> {
     }
 
     @Override
-    public void edit(int id , Product product){
+    public void edit(int id, Product product) {
         String sql = "update products set name = ?  , quantity = ? , price = ? , idCategory = ? , image = ?  where id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1 , product.getName());
-            preparedStatement.setInt(2,product.getQuantity());
-            preparedStatement.setFloat(3,product.getPrice());
-            preparedStatement.setInt(4,product.getCategory().getId());
-            preparedStatement.setString(5,product.getImage());
-            preparedStatement.setInt(6,id);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setInt(2, product.getQuantity());
+            preparedStatement.setFloat(3, product.getPrice());
+            preparedStatement.setInt(4, product.getCategory().getId());
+            preparedStatement.setString(5, product.getImage());
+            preparedStatement.setInt(6, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -86,20 +87,41 @@ public class ProductService implements IProductService<Product> {
         List<Product> productList = findAll();
         List<Product> searchList = new ArrayList<>();
         for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getName().toLowerCase().contains(name.toLowerCase())){
+            if (productList.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
                 System.out.println(productList.get(i).toString());
                 searchList.add(productList.get(i));
             }
         }
         return searchList;
     }
-    public Product getById(int id){
+
+    public Product getById(int id) {
         Product product = null;
         List<Product> productList = findAll();
-        for (Product p:productList ) {
-            if (id == p.getId());
-             product = p;
+        for (Product p : productList) {
+            if (id == p.getId()) ;
+            product = p;
         }
         return product;
+    }
+
+    public float revenueMonth(int month) throws SQLException {
+        String query = "SELECT SUM(products.price * oderdetail.quantity) AS revenue\n" +
+                "                   FROM products\n" +
+                "                   JOIN oderdetail ON products.id = oderdetail.idProduct\n" +
+                "                   JOIN oder ON oder.id = oderdetail.idOder\n" +
+                "                   WHERE MONTH(time) = ?;";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, month);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getFloat("revenue");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 }
