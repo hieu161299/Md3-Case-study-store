@@ -7,13 +7,10 @@ public class Oder {
     private int id;
     private Date time;
     private User customer;
-    private int quantity ;
 
-    private List<Item> itemList ;
-    private int status;
 
     public Oder() {
-        this.status = 0;
+
     }
 
     public int getId() {
@@ -40,27 +37,5 @@ public class Oder {
         this.customer = customer;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }
