@@ -97,10 +97,11 @@ public class ProductService implements IProductService<Product> {
 
     public Product getById(int id) {
         Product product = null;
-        List<Product> productList = findAll();
-        for (Product p : productList) {
-            if (id == p.getId()) ;
-            product = p;
+        for (int i = 0; i < findAll().size(); i++) {
+            if (findAll().get(i).getId() == id){
+                product = findAll().get(i);
+                break;
+            }
         }
         return product;
     }

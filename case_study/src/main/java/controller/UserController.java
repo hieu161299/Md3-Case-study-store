@@ -2,6 +2,7 @@ package controller;
 
 import filter.SessionUserAdmin;
 import filter.SessionUserMember;
+import model.Product;
 import model.User;
 import service.UserService;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserController", value = "/Users")
@@ -60,7 +62,7 @@ public class UserController extends HttpServlet {
     private void showInformation(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/informationCustomer.jsp");
         HttpSession session = request.getSession();
-        int id = (int) session.getAttribute("id");
+        int id = (int) session.getAttribute("idUser");
         User user = userService.findUserById(id);
         request.setAttribute("user", user);
 
@@ -152,7 +154,8 @@ public class UserController extends HttpServlet {
             String role = userService.getRole(userName, password);
             HttpSession session = request.getSession();
             session.setAttribute("role", role);
-            session.setAttribute("id", id);
+            session.setAttribute("idUser", id);
+          //  request.setAttribute("idUser",id);
             boolean checkAdmin = SessionUserAdmin.checkUser(request);
             boolean checkMember = SessionUserMember.checkUser(request);
             if(checkAdmin){
@@ -164,6 +167,8 @@ public class UserController extends HttpServlet {
                 }
             }else if(checkMember){
                 try {
+                    List<Product> productList = new ArrayList<Product>();
+                    session.setAttribute("productList" , productList);
 //                khi đăng nhập thành công chuyển trang Member home vào đây
                     response.sendRedirect("/view?action=findAll");
                 } catch (IOException e) {

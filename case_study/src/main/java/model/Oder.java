@@ -7,13 +7,36 @@ public class Oder {
     private int id;
     private Date time;
     private User customer;
-    private int quantity ;
 
-    private List<Item> itemList ;
-    private int status;
+    // thêm các trường để làm giỏ hàng
+
+    private List<Product> productList;
+    private int quantityOder;
+
+    public Oder(List<Product> productList, int quantityOder) {
+        this.productList = productList;
+        this.quantityOder = quantityOder;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    public int getQuantityOder() {
+        return quantityOder;
+    }
+
+    public void setQuantityOder(int quantityOder) {
+        this.quantityOder = quantityOder;
+    }
+    //
 
     public Oder() {
-        this.status = 0;
+
     }
 
     public int getId() {
@@ -40,27 +63,5 @@ public class Oder {
         this.customer = customer;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }
