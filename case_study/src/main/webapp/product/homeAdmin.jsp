@@ -37,10 +37,19 @@
    style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #b80000;">
     <i class="fas fa-trash-alt"></i>xem hóa đơn
 </a>
+<a href="http://localhost:8080/view?action=create" class="delete-link"
+   style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #b80000;">
+    <i class="fas fa-trash-alt"></i>Thêm sản phẩm
+</a>
 <form action="/view" method="get">
     <input type="hidden" name="action" value="search">
     <input type="text" placeholder="search" name="nameSearch">
     <button>Tìm</button>
+</form>
+<form action="/view" method="post">
+    <input type="hidden" name="action" value="revenue">
+    <input type="text" placeholder="search " name="revenue">
+    <button type="submit">Tìm doanh thu tháng</button>
 </form>
 <table border="1">
     <tr>
@@ -57,13 +66,13 @@
             <td>${product.price}</td>
             <td>${product.quantity}</td>
             <td>
-                <a href="http://localhost:8080/view?action=edit&id=${product.id}" class="edit-link"
+                <a href="http://localhost:8080/view?action=edit&idProduct=${product.id}" class="edit-link"
                    style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #252585;">
                     <i class="fas fa-edit"></i>Edit
                 </a>
             </td>
             <td>
-                <a href="http://localhost:8080/view?action=delete&id=${product.id}" class="delete-link"
+                <a href="http://localhost:8080/view?action=delete&idProduct=${product.id}" class="delete-link"
                    style="display: inline-block; padding: 5px 10px; border-radius: 3px; text-align: center; text-decoration: none; color: #fff; background-color: #b80000;">
                     <i class="fas fa-trash-alt"></i>Delete
                 </a>
