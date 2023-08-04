@@ -1,121 +1,110 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: DELL
-  Date: 01/08/2023
-  Time: 19:56
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Đăng ký</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Đường dẫn tới tệp CSS Bootstrap -->
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      margin: 0;
-      padding: 0;
+    .gradient-custom {
+      /* fallback for old browsers */
+      background: #f093fb;
+
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
     }
 
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      background-color: #ffffff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+      font-size: 1rem;
+      line-height: 2.15;
+      padding-left: .75em;
+      padding-right: .75em;
     }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 16px;
-      font-size: 16px;
-    }
-
-    input[type="submit"] {
-      background-color: #007bff;
-      color: #fff;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    input[type="submit"]:hover {
-      background-color: #0056b3;
-    }
-
-    p {
-      font-size: 16px;
-      margin-top: 10px;
+    .card-registration .select-arrow {
+      top: 13px;
     }
   </style>
 </head>
 <body>
-<div class="container mt-5">
-  <form action="http://localhost:8080/Users?action=registeradmin" method="post">
-    <div class="mb-3">
-      <label for="username">Tên đăng nhập:</label>
-      <input type="text" class="form-control" id="username" name="username" required>
-    </div>
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+            <form action="http://localhost:8080/Users?action=registeradmin" method="post">
 
-    <div class="mb-3">
-      <label for="password">Mật khẩu:</label>
-      <input type="password" class="form-control" id="password" name="password" required>
-    </div>
+              <div class="row">
+                <div class="col-md-6 mb-4">
 
-    <div class="mb-3">
-      <label for="confirmPassword">Xác nhận mật khẩu:</label>
-      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-    </div>
+                  <div class="form-outline">
+                    <input type="text" id="firstName" class="form-control form-control-lg" name="username"/>
+                    <label class="form-label" for="firstName">User Name</label>
+                  </div>
 
-    <!-- New fields for name, age, and image -->
-    <div class="mb-3">
-      <label for="name">Họ và tên:</label>
-      <input type="text" class="form-control" id="name" name="name" required>
-    </div>
+                </div>
+                <div class="col-md-6 mb-4">
 
-    <div class="mb-3">
-      <label for="age">Tuổi:</label>
-      <input type="text" class="form-control" id="age" name="age" required>
-    </div>
-    <div class="mb-3">
-      <label for="age">Địa chỉ:</label>
-      <input type="text" class="form-control" id="address" name="address" required>
-    </div>
-    <div class="mb-3">
-      <label for="image">Ảnh đại diện:</label>
-      <input type="text" class="form-control" id="image" name="image" required>
-    </div>
+                  <div class="form-outline">
+                    <input type="text" id="lastName" class="form-control form-control-lg" name="password"/>
+                    <label class="form-label" for="lastName">PassWord</label>
+                  </div>
 
-    <button  class="btn btn-primary">Đăng ký</button>
-  </form>
-</div>
+                </div>
+              </div>
 
-<script src="js/bootstrap.min.js"></script>
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                  <div class="form-outline datepicker w-100">
+                    <input type="text" class="form-control form-control-lg" id="birthdayDate" name="name"/>
+                    <label for="birthdayDate" class="form-label">Full Name</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input type="number" id="emailAddress" class="form-control form-control-lg" name="age" />
+                    <label class="form-label" for="emailAddress">Age</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="text" id="phoneNumber" class="form-control form-control-lg" name="address" />
+                    <label class="form-label" for="phoneNumber">Address</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+
+                  <div class="form-outline">
+                    <input type="text" id="image" class="form-control form-control-lg" name="image" />
+                    <label class="form-label" for="image">Image</label>
+                  </div>
+
+                </div>
+              </div>
+              <div class="mt-4 pt-2">
+                <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </body>
 </html>
