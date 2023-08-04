@@ -168,6 +168,7 @@ public class UserController extends HttpServlet {
             }else if(checkMember){
                 try {
                     List<Product> productList = new ArrayList<Product>();
+                    session.setAttribute("productList" , productList);
 //                khi đăng nhập thành công chuyển trang Member home vào đây
                     response.sendRedirect("/view?action=findAll");
                 } catch (IOException e) {
