@@ -29,7 +29,7 @@ create table products
     name        varchar(255)                   not null,
     price   float                          not null,
     quantity    int default 0,
-    idCategory  int                            not null,
+    idCategory  int                            ,
     image text ,
     FOREIGN KEY (idCategory) REFERENCES category (id)
 );
@@ -86,7 +86,7 @@ create table oder
 (
     id     int primary key auto_increment not null,
     time   DATETIME                       not null,
-    userId int                            not null,
+    userId int                            ,
     FOREIGN KEY (userId) REFERENCES users (id)
 );
 
@@ -99,8 +99,8 @@ create table oderDetail (
                             id  int primary key auto_increment not null,
                             priceProduct float not null ,
                             quantity int not null default 1,
-                            idProduct int not null ,
-                            idOder int not null ,
+                            idProduct int  ,
+                            idOder int  ,
                             FOREIGN KEY (idProduct) REFERENCES products (id),
                             FOREIGN KEY (idOder) REFERENCES oder (id)
 );
