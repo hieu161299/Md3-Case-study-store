@@ -8,6 +8,7 @@ import model.dto.SaveBill;
 import service.CategoryService;
 import service.OrderDetailsJDBC;
 import service.ProductService;
+import service.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -22,6 +23,7 @@ import java.util.List;
 public class ProductController extends HttpServlet {
     ProductService productService = new ProductService();
     CategoryService categoryService = new CategoryService();
+    UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,11 +32,15 @@ public class ProductController extends HttpServlet {
         request.setAttribute("action" , action);
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
+
         if (role.equals("member")) {
             switch (action) {
                 case "findAll":
                 case "search":
                     findAll(request, response);
+                    break;
+                case "showCart":
+                    showCart(request , response);
                     break;
             }
         } else if (role.equals("admin")) {
@@ -102,10 +108,31 @@ public class ProductController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+
+    private void showCart(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/product/cartCustomer.jsp");
+        HttpSession session = request.getSession();
+        List<Product> productList = (List<Product>) session.getAttribute("productList");
+        request.setAttribute("productList" , productList);
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void findAll(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
+
         String action = request.getParameter("action");
+        int id = (int) session.getAttribute("idUser");
+        request.setAttribute("idUser",id);
+
+        User user = userService.findUserById(id);
+        request.setAttribute("user" , user);
+
         List<Product> productList = null;
         if (action.equals("findAll")){
              productList = productService.findAll();
