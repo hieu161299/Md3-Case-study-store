@@ -2,7 +2,6 @@ package service;
 
 import model.Category;
 import model.Product;
-import model.User;
 import service.IService.IProductService;
 
 import java.sql.Connection;
@@ -124,5 +123,14 @@ public class ProductService implements IProductService<Product> {
             throw new RuntimeException(e);
         }
         return 0;
+    }
+
+    public int findIndexByID(List<Product> productList , int id){
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId() == id){
+                return i;
+            }
+        }
+        return -1;
     }
 }
