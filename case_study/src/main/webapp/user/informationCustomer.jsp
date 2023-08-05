@@ -29,9 +29,6 @@
       <td>${user.address}</td>
       <td><a href="http://localhost:8080/Users?action=editCustomer">Sửa</a></td>
     </tr>
-
-
-
 </table>
 </body>
 </html>

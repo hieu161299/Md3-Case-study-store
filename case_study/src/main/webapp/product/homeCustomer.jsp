@@ -26,6 +26,7 @@
     <input type="text" placeholder="search by name" name="nameSearch">
     <button>Tìm</button>
 </form>
+<a href="http://localhost:8080/view?action=showCart&idUser=${user.id}">Giỏ hàng của tôi</a>
 <table border="1">
     <tr>
         <th>Ảnh</th>
@@ -42,7 +43,14 @@
             <td><img src="${product.image}" style="width: 150px ; height:  150px" alt="sv"></td>
             <td>${product.name}</td>
             <td>${product.price}</td>
-            <td><a href="http://localhost:8080/cart?action=addToCart&&pId=${product.id}">Thêm vào giỏ hàng</a></td>
+            <td>
+                <form action="http://localhost:8080/oder">
+                    <input type="hidden" name="action" value="addToCart">
+                    <input type="hidden" name="idProduct" value="${product.id}">
+                    <input type="hidden" name="idUser" value="${idUser}">
+                    <button>Thêm vào giỏ hàng</button>
+                </form>
+            </td>
             <td>mua ngay</td>
         </tr>
 

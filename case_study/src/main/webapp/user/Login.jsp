@@ -53,7 +53,6 @@
                     <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee ;color: white ; font-size: 18px ; width: 71% ; height: 37px ; display: block ; border: 0px white solid ; border-radius: 5px ; text-align: center ; text-decoration: none ; margin-top: 15px" href="https://twitter.com/"
                        role="button">
                         <i class="fab fa-twitter me-2" style="margin-top: 10px "></i>Continue with Twitter</a>
-
                 </form>
             </div>
         </div>

@@ -76,7 +76,6 @@
             <label for="name">ID:</label>
             <input type="text" class="form-control" id="id" name="id" value="${user.id}" readonly required>
         </div>
-
         <div class="mb-3">
             <label for="name">Họ và tên:</label>
             <input type="text" class="form-control" id="name" name="name" required>
