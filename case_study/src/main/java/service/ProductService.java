@@ -125,4 +125,13 @@ public class ProductService implements IProductService<Product> {
         }
         return 0;
     }
+
+    public int findIndexByID(List<Product> productList , int id){
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId() == id){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

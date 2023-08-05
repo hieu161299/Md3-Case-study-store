@@ -113,7 +113,12 @@ public class ProductController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/product/cartCustomer.jsp");
         HttpSession session = request.getSession();
         List<Product> productList = (List<Product>) session.getAttribute("productList");
+        int sum = 0;
+        for (Product product: productList) {
+            sum += (product.getQuantity() * product.getPrice());
+        }
         request.setAttribute("productList" , productList);
+        request.setAttribute("sum" , sum);
         try {
             dispatcher.forward(request,response);
         } catch (ServletException e) {
