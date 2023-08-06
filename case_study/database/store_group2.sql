@@ -104,7 +104,8 @@ create table oder
     userId int                            ,
     FOREIGN KEY (userId) REFERENCES users (id)
 );
-
+alter table oder add status text not null after userId;
+/*thêm trường status để xác định hóa đơn đã thanh toán chưa*/
 insert into oder(time, userId)
 values ('2023-07-21 ', 2);
 

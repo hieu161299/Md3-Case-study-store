@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-12">
             <nav class="navbar navbar-expand-lg nav-bg">
-                <div class="col-6 d-flex justify-content-start">
+                <div class="col-4 d-flex justify-content-start">
                     <a class="navbar-brand color-white" href="http://localhost:8080/view?action=findAll">Home</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -40,8 +40,10 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-
-                <div class=" col-6 collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+               <div class=" col-4 collapse navbar-collapse d-flex justify-content-end">
+                   <a class="navbar-brand color-white" href="http://localhost:8080/oder?action=billCustomer">My Bill</a>
+               </div>
+                <div class=" col-4 collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
                     <a class="navbar-brand color-white" href="http://localhost:8080/Users?action=information">MyAccount</a>
 
                 </div>
@@ -57,21 +59,18 @@
                     <th scope="col">Giá</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Thành tiền</th>
+                    <th scope="col " colspan="2">Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${productList}" var="product">
 
                     <tr>
-                        <input type="hidden" name="pId" value="${product.id}">
+
                         <th scope="row">
                             <div class="input-group ">
                                 <div class=" input-group-prepend">
-                                    <div class="input-group-text">
-                                        <form action=""> <%-- // truyền index sản phẩm để thanh toán vào xóa khỏi giỏ hàng--%>
-                                            <input type="checkbox" aria-label="Checkbox for following text input">
-                                        </form>
-                                    </div>
+
                                     <div >
                                         <img src="${product.image}" alt="image">
 
@@ -81,10 +80,22 @@
                             </div>
                         </th>
                         <td>${product.name}</td>
-                        <td>${product.price}</td>
+                        <td>${product.price}$</td>
                         <td>${product.quantity}</td>
-
-                        <td>${product.quantity * product.price}</td>
+                        <td>${product.quantity * product.price}$</td>
+                        <td>
+                            <form action="/bill">
+                                <input type="hidden" name="action" value="paymentProduct">
+                                <input type="hidden" name="pId" value="${product.id}">
+                                <button>thanh toán</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/delete-from-cart">
+                                <input type="hidden" name="idProduct" value="${product.id}">
+                                <button>Hủy</button>
+                            </form>
+                        </td>
 
                     </tr>
 
@@ -93,9 +104,13 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-end align-items-center">
-                <div style="font-size: 20px">Tổng</div>
-                <div style="margin-left: 30px ; font-size: 20px ; font-weight: 600">${sum}</div>
-                <button class="btn btn-primary btn-lg" style="margin-left: 30px">Thanh toán</button>
+                <div style="font-size: 20px">Tổng tiền</div>
+                <div style="margin-left: 30px ; font-size: 20px ; font-weight: 600">${sum}$</div>
+                <form action="/bill">
+                    <input type="hidden" name="action" value="paymentAll">
+                    <button class="btn btn-primary btn-lg" style="margin-left: 30px">Thanh toán</button>
+                </form>
+
 
             </div>
 

@@ -5,35 +5,31 @@ import java.util.List;
 
 public class Oder {
     private int id;
-    private Date time;
+    private String time;
     private User customer;
+    private int idUser;
+    private boolean status;
 
     // thêm các trường để làm giỏ hàng
 
-    private List<Product> productList;
-    private int quantityOder;
 
-    public Oder(List<Product> productList, int quantityOder) {
-        this.productList = productList;
-        this.quantityOder = quantityOder;
+    public Oder(String time, User user) {
+        this.time = time;
+        this.idUser = idUser;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public Oder(String time, int idUser , boolean status) {
+        this.time = time;
+        this.idUser = idUser;
+        this.status = status;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public Oder(int id, String time, int idUser, boolean status) {
+        this.id = id;
+        this.time = time;
+        this.idUser = idUser;
+        this.status = status;
     }
-
-    public int getQuantityOder() {
-        return quantityOder;
-    }
-
-    public void setQuantityOder(int quantityOder) {
-        this.quantityOder = quantityOder;
-    }
-    //
 
     public Oder() {
 
@@ -47,11 +43,11 @@ public class Oder {
         this.id = id;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -63,5 +59,19 @@ public class Oder {
         this.customer = customer;
     }
 
+    public int getIdUser() {
+        return idUser;
+    }
 
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

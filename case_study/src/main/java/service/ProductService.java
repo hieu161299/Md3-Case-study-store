@@ -87,7 +87,6 @@ public class ProductService implements IProductService<Product> {
         List<Product> searchList = new ArrayList<>();
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
-                System.out.println(productList.get(i).toString());
                 searchList.add(productList.get(i));
             }
         }
@@ -125,12 +124,29 @@ public class ProductService implements IProductService<Product> {
         return 0;
     }
 
-    public int findIndexByID(List<Product> productList , int id){
+    public int findIndexByID(List<Product> productList , int idProduct){
         for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getId() == id){
+            if (productList.get(i).getId() == idProduct){
                 return i;
             }
         }
         return -1;
+    }
+    public void updateQuantity(int idProduct , int quantity){
+        int quantityUpdate = 0;
+        for (int i = 0; i < findAll().size(); i++) {
+            if (findAll().get(i).getId() == idProduct){
+                quantityUpdate = findAll().get(i).getQuantity() - quantity;
+            }
+        }
+        String sql = "update products set quantity = ? where id = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,quantityUpdate);
+            preparedStatement.setInt(2,idProduct);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
