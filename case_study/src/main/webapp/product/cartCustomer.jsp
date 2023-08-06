@@ -82,7 +82,8 @@
                         <td>${product.quantity}</td>
                         <td>${product.quantity * product.price}$</td>
                         <td>
-                            <form action="">
+                            <form action="/bill">
+                                <input type="hidden" name="action" value="paymentProduct">
                                 <input type="hidden" name="pId" value="${product.id}">
                                 <button>thanh toán</button>
                             </form>
@@ -104,7 +105,7 @@
                 <div style="font-size: 20px">Tổng tiền</div>
                 <div style="margin-left: 30px ; font-size: 20px ; font-weight: 600">${sum}$</div>
                 <form action="/bill">
-                    <input type="hidden" name="action" value="payment">
+                    <input type="hidden" name="action" value="paymentAll">
                     <button class="btn btn-primary btn-lg" style="margin-left: 30px">Thanh toán</button>
                 </form>
 

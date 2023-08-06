@@ -133,4 +133,21 @@ public class ProductService implements IProductService<Product> {
         }
         return -1;
     }
+    public void updateQuantity(int idProduct , int quantity){
+        int quantityUpdate = 0;
+        for (int i = 0; i < findAll().size(); i++) {
+            if (findAll().get(i).getId() == idProduct){
+                quantityUpdate = findAll().get(i).getQuantity() - quantity;
+            }
+        }
+        String sql = "update products set quantity = ? where id = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,quantityUpdate);
+            preparedStatement.setInt(2,idProduct);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
