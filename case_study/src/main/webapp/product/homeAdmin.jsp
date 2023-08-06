@@ -1,10 +1,4 @@
-<%--
-Created by IntelliJ IDEA.
-User: ACER NITRO 5
-Date: 8/2/2023
-Time: 4:33 PM
-To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
 Created by IntelliJ IDEA.
@@ -164,7 +158,7 @@ To change this template use File | Settings | File Templates.
                 <tr>
                     <td><img src="${product.image}" style="width: 150px; height: 150px;" alt="Product"></td>
                     <td>${product.name}</td>
-                    <td>${product.price}</td>
+                    <td>${product.price} $</td>
                     <td>${product.quantity}</td>
                     <td>
                         <a href="http://localhost:8080/view?action=edit&idProduct=${product.id}" class="edit-link"

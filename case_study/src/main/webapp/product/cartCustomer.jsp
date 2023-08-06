@@ -31,8 +31,8 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <nav class="navbar navbar-expand-lg nav-bg">
-                <div class="col-6 d-flex justify-content-start">
+            <nav class="navbar navbar-expand-lg nav-bg fixed-top ">
+                <div class="col-4 d-flex justify-content-start">
                     <a class="navbar-brand color-white" href="http://localhost:8080/view?action=findAll">Home</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -40,8 +40,11 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
+                <div class=" col-4 collapse navbar-collapse d-flex justify-content-end" >
+                    <a class="navbar-brand color-white" href="http://localhost:8080/oders?action=billCustomer">My Bill</a>
 
-                <div class=" col-6 collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+                </div>
+                <div class=" col-4 collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
                     <a class="navbar-brand color-white" href="http://localhost:8080/Users?action=information">MyAccount</a>
 
                 </div>

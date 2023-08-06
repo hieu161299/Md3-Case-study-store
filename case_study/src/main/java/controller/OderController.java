@@ -20,7 +20,15 @@ public class OderController extends HttpServlet {
         switch (action){
             case "addToCart":
                 addToCart(request , response);
+            case "showBillCustomer":
+                showBillCustomer(request , response);
         }
+    }
+
+    private void showBillCustomer(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        int idUser = (int) session.getAttribute("idUser");
+
     }
 
     private void addToCart(HttpServletRequest request, HttpServletResponse response) {

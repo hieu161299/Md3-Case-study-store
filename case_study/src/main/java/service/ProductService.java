@@ -2,7 +2,6 @@ package service;
 
 import model.Category;
 import model.Product;
-import model.User;
 import service.IService.IProductService;
 
 import java.sql.Connection;

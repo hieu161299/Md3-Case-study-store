@@ -169,7 +169,7 @@
             <td>${saveBill.nameCustomer}</td>
             <td>${saveBill.nameProduct}</td>
             <td>${saveBill.category}</td>
-            <td>${saveBill.total} USD</td>
+            <td>${saveBill.total} $</td>
             <td>${saveBill.time}</td>
         </tr>
         </c:forEach>
