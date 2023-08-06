@@ -8,6 +8,7 @@ public class OderDetail {
     private int idOder;
 
     private Product product;
+    private Oder oder;
 
     public OderDetail(int id, float priceProduct, int quantity, int idProduct, int idOder) {
         this.id = id;
@@ -22,6 +23,11 @@ public class OderDetail {
         this.quantity = quantity;
         this.idProduct = idProduct;
         this.idOder = idOder;
+    }
+
+    public OderDetail(Product product, Oder oder) {
+        this.product = product;
+        this.oder = oder;
     }
 
     public int getId() {
