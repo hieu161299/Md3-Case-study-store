@@ -29,7 +29,7 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        request.setAttribute("action" , action);
+        request.setAttribute("action", action);
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
 
@@ -40,7 +40,7 @@ public class ProductController extends HttpServlet {
                     findAll(request, response);
                     break;
                 case "showCart":
-                    showCart(request , response);
+                    showCart(request, response);
                     break;
             }
         } else if (role.equals("admin")) {
@@ -55,23 +55,23 @@ public class ProductController extends HttpServlet {
                     break;
 
                 case "create":
-                   showFormCreate(request,response);
-                   break;
+                    showFormCreate(request, response);
+                    break;
                 case "delete":
 
                     try {
 
-                        deleteProduct(request , response);
+                        deleteProduct(request, response);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                     break;
                 case "edit":
 
-                    showFormEdit(request,response);
+                    showFormEdit(request, response);
                     break;
                 case "revenue":
-                    showFormRevenue(request , response);
+                    showFormRevenue(request, response);
             }
         }
     }
@@ -83,23 +83,26 @@ public class ProductController extends HttpServlet {
 
     private void showFormEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idProduct = Integer.parseInt(request.getParameter("idProduct"));
-        request.setAttribute("id" , idProduct);
-        List <Category> categories = categoryService.findAll();
-        request.setAttribute("categories" , categories);
+        request.setAttribute("id", idProduct);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("categories", categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/product/edit.jsp");
         dispatcher.forward(request, response);
     }
+
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("idProduct"));
         this.productService.delete(id);
         response.sendRedirect("http://localhost:8080/view?action=findAll");
     }
+
     private void showFormCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List <Category> categories = categoryService.findAll();
-        request.setAttribute("categories" , categories);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("categories", categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/product/create.jsp");
         dispatcher.forward(request, response);
     }
+
     private void showBill(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OrderDetailsJDBC orderDetailsJDBC = new OrderDetailsJDBC();
         List<SaveBill> saveBills = orderDetailsJDBC.findBill();
@@ -112,38 +115,41 @@ public class ProductController extends HttpServlet {
     private void showCart(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/product/cartCustomer.jsp");
         HttpSession session = request.getSession();
+        //  int idUser = (int) session.getAttribute("idUser");
         List<Product> productList = (List<Product>) session.getAttribute("productList");
         int sum = 0;
-        for (Product product: productList) {
+        for (Product product : productList) {
             sum += (product.getQuantity() * product.getPrice());
         }
-        request.setAttribute("productList" , productList);
-        request.setAttribute("sum" , sum);
+        // request.setAttribute("idUser",idUser);
+        request.setAttribute("productList", productList);
+        request.setAttribute("sum", sum);
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
     private void findAll(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
 
         String action = request.getParameter("action");
         int id = (int) session.getAttribute("idUser");
-        request.setAttribute("idUser",id);
+        request.setAttribute("idUser", id);
 
         User user = userService.findUserById(id);
-        request.setAttribute("user" , user);
+        request.setAttribute("user", user);
 
         List<Product> productList = null;
-        if (action.equals("findAll")){
-             productList = productService.findAll();
-        }else if (action.equals("search")){
+        if (action.equals("findAll")) {
+            productList = productService.findAll();
+        } else if (action.equals("search")) {
             String name = request.getParameter("nameSearch");
-           productList =productService.findByName(name);
+            productList = productService.findByName(name);
         }
 
         request.setAttribute("productList", productList);
@@ -177,23 +183,24 @@ public class ProductController extends HttpServlet {
         switch (action) {
             case "create":
                 try {
-                    createProduct(request , response);
+                    createProduct(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
             case "edit":
-                editProduct(request , response);
+                editProduct(request, response);
                 break;
             case "revenue":
                 try {
-                    revenueMonth(request , response);
+                    revenueMonth(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
         }
 
     }
+
     private void revenueMonth(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String monthParam = request.getParameter("revenue");
         int month = Integer.parseInt(monthParam);
@@ -202,6 +209,7 @@ public class ProductController extends HttpServlet {
         request.setAttribute("month", month);
         showFormRevenue(request, response);
     }
+
     private void editProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
@@ -210,8 +218,8 @@ public class ProductController extends HttpServlet {
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
         Category category = new Category(idCategory);
         String image = request.getParameter("image");
-       Product product = new Product(name,quantity,price,category,image);
-        productService.edit(id , product);
+        Product product = new Product(name, quantity, price, category, image);
+        productService.edit(id, product);
         try {
             response.sendRedirect("http://localhost:8080/view?action=findAll");
         } catch (IOException e) {
@@ -226,7 +234,7 @@ public class ProductController extends HttpServlet {
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
         Category category = new Category(idCategory);
         String image = request.getParameter("image");
-        Product product = new Product( name, quantity, price, category,image);
+        Product product = new Product(name, quantity, price, category, image);
         productService.add(product);
         response.sendRedirect("http://localhost:8080/view?action=findAll");
     }

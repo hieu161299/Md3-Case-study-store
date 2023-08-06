@@ -3,9 +3,11 @@ package model;
 public class OderDetail {
     private int id ;
     private float priceProduct ;
-    private int quantity;
+    private int quantity; // số lượng sản phẩm khách mua
     private int idProduct;
     private int idOder;
+
+    private Product product;
 
     public OderDetail(int id, float priceProduct, int quantity, int idProduct, int idOder) {
         this.id = id;
@@ -15,7 +17,7 @@ public class OderDetail {
         this.idOder = idOder;
     }
     public OderDetail( float priceProduct, int quantity, int idProduct, int idOder) {
-        this.id = id;
+
         this.priceProduct = priceProduct;
         this.quantity = quantity;
         this.idProduct = idProduct;
